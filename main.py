@@ -24,7 +24,6 @@ def users():
     if request.method == "POST":
         user_data = json.loads(request.data)
         new_user = User(
-            id=user_data["id"],
             first_name=user_data["first_name"],
             last_name=user_data["last_name"],
             age=user_data["age"],
@@ -47,12 +46,12 @@ def user(uid):
     if request.method == "PUT":
         user_data = json.loads(request.data)
         user_change = User.query.get(uid)
-        user_change.first_name = user_data("first_name")
-        user_change.last_name = user_data("last_name")
-        user_change.age = user_data("age")
-        user_change.email = user_data("email")
-        user_change.role = user_data("role")
-        user_change.phone = user_data("phone")
+        user_change.first_name = user_data["first_name"]
+        user_change.last_name = user_data["last_name"]
+        user_change.age = user_data["age"]
+        user_change.email = user_data["email"]
+        user_change.role = user_data["role"]
+        user_change.phone = user_data["phone"]
 
         db.session.add(user_change)
         db.session.commit()
@@ -79,7 +78,6 @@ def orders():
     if request.method == "POST":
         order_data = json.loads(request.data)
         new_order = Order(
-            id=order_data["id"],
             name=order_data["name"],
             description=order_data["description"],
             start_date=order_data["start_date"],
@@ -138,7 +136,6 @@ def offers():
     if request.method == "POST":
         offer_data = json.loads(request.data)
         new_offer = Offer(
-            id=offer_data["id"],
             order_id=offer_data["order_id"],
             executor_id=offer_data["executor_id"]
         )
