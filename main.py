@@ -45,7 +45,7 @@ def user(uid):
 
     if request.method == "PUT":
         user_data = json.loads(request.data)
-        user_change = User.query.get(uid)
+        user_change = db.session.query(User).get(uid)
         user_change.first_name = user_data["first_name"]
         user_change.last_name = user_data["last_name"]
         user_change.age = user_data["age"]
@@ -59,7 +59,7 @@ def user(uid):
         return "Пользователь обновлен", 204
 
     if request.method == "DELETE":
-        user_delete = User.query.get(uid)
+        user_delete = db.session.query(User).get(uid)
 
         db.session.delete(user_delete)
         db.session.commit()
@@ -101,7 +101,7 @@ def order(uid):
 
     if request.method == "PUT":
         order_data = json.loads(request.data)
-        order_change = Order.query.get(uid)
+        order_change = db.session.query(Order).get(uid)
         order_change.name = order_data("name")
         order_change.description = order_data("description")
         order_change.start_date = order_data("start_date")
@@ -117,7 +117,7 @@ def order(uid):
         return "Заказ обновлен", 204
 
     if request.method == "DELETE":
-        order_delete = Order.query.get(uid)
+        order_delete = db.session.query(Order).get(uid)
 
         db.session.delete(order_delete)
         db.session.commit()
@@ -152,7 +152,7 @@ def offer(uid):
         return json.dumps(Offer.query.get(uid).get_dict()), 200
     if request.method == "PUT":
         offer_data = json.loads(request.data)
-        offer_change = Order.query.get(uid)
+        offer_change = db.session.query(Offer).get(uid)
         offer_change.order_id = offer_data("order_id")
         offer_change.executor_id = offer_data("executor_id")
 
@@ -162,7 +162,7 @@ def offer(uid):
         return "Предложение обновлено", 204
 
     if request.method == "DELETE":
-        offer_delete = Offer.query.get(uid)
+        offer_delete = db.session.query(Offer).get(uid)
 
         db.session.delete(offer_delete)
         db.session.commit()
