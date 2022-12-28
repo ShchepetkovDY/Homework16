@@ -102,14 +102,14 @@ def order(uid):
     if request.method == "PUT":
         order_data = json.loads(request.data)
         order_change = db.session.query(Order).get(uid)
-        order_change.name = order_data("name")
-        order_change.description = order_data("description")
-        order_change.start_date = order_data("start_date")
-        order_change.end_date = order_data("end_date")
-        order_change.address = order_data("address")
-        order_change.price = order_data("price")
-        order_change.customer_id = order_data("customer_id")
-        order_change.executor_id = order_data("executor_id")
+        order_change.name = order_data["name"]
+        order_change.description = order_data["description"]
+        order_change.start_date = order_data["start_date"]
+        order_change.end_date = order_data["end_date"]
+        order_change.address = order_data["address"]
+        order_change.price = order_data["price"]
+        order_change.customer_id = order_data["customer_id"]
+        order_change.executor_id = order_data["executor_id"]
 
         db.session.add(order_change)
         db.session.commit()
@@ -153,8 +153,8 @@ def offer(uid):
     if request.method == "PUT":
         offer_data = json.loads(request.data)
         offer_change = db.session.query(Offer).get(uid)
-        offer_change.order_id = offer_data("order_id")
-        offer_change.executor_id = offer_data("executor_id")
+        offer_change.order_id = offer_data["order_id"]
+        offer_change.executor_id = offer_data["executor_id"]
 
         db.session.add(offer_change)
         db.session.commit()
